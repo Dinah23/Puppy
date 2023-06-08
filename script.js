@@ -70,11 +70,45 @@ const removePlayer = async (playerId) => {
  * @returns the playerContainerHTML variable.
  */
 const renderAllPlayers = (playerList) => {
+    let playerContainer = document.querySelector(`#player-container`);
     try {
-        
-    } catch (err) {
-        console.error('Uh oh, trouble rendering players!', err);
-    }
+        playerContainer.innerHtml = '';
+        playerList.forEach((player) =>{
+            const playerElement = document.createElement('div');
+      playerElement.classList.add('party');
+      playerElement.innerHTML = `
+                <h2>${player.name}</h2>
+                <p>${player.breed}</p>
+                <p>${player.age}</p>
+                <button class="details-button" data-id="${party.id}">See Details</button>
+                <button class="delete-button" data-id="${party.id}">Delete</button>
+            `;
+            playerContainer.appendChild(playerElement);
+        });;
+   
+        // see details
+const detailsButton = playerElement.querySelector('.details-button');
+detailsButton.addEventListener('click', async (event) => {
+  // get the id
+  const playerId = event.target.dataset.id
+  // send id to renderSinglePartyById function
+  renderSinglePlayerById(playerId)
+});
+
+// delete pupper
+const deleteButton = playerElement.querySelector('.delete-button');
+deleteButton.addEventListener('click', async (event) => {
+  // get the id
+  const playerId = event.target.dataset.id
+  // pass the id to deleteParty function
+  deletePlayer(playerId)
+  // get it off the page
+  event.target.closest('div.party').remove()
+});
+
+} catch (error) {
+console.error(error);
+}
 };
 
 
