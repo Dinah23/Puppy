@@ -2,9 +2,11 @@ const playerContainer = document.getElementById("all-players-container");
 const newPlayerFormContainer = document.getElementById("new-player-form");
 
 // Add your cohort name to the cohortName variable below, replacing the 'COHORT-NAME' placeholder
-const cohortName = "2302-ACC-ET-WEB-PT-B";
 // Use the APIURL variable for fetch requests
-const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`;
+const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${2302-acc-et-web-pt-b}/players`;
+var playerRoster;
+var TEAM_ID = 891;
+var  COHORT_ID = 479;
 
 /**
  * It fetches all players from the API and returns them
@@ -43,55 +45,6 @@ const addNewPlayer = async (playerObj) => {
 
 
 const removePlayer = async (playerId) => {
-  try {
-    const response = await fetch(`${APIURL}/players/${playerId}`, {
-      method: "DELETE",
-    });
-    const puppy = await response.json();
-    console.log(puppy);
-
-    window.location.reload();
-  } catch (err) {
-    console.error(
-      `Whoops, trouble removing player #${playerId} from the roster!`,
-      err
-    );
-  }
-};
-
-// render a single player by id
-const renderSinglePlayerById = async (playerId) => {
-  try {
-    // Fetch player details from the server
-    const player = await fetchSinglePlayer(playerId);
-
-    // Create a new HTML element to display player details
-    const playerDetailsElement = document.createElement("div");
-    playerDetailsElement.classList.add("player-details");
-
-    // Display single player in the main player container only
-    playerContainer.innerHTML = "";
-    playerDetailsElement.innerHTML = `
-      <h2>${player.name.toUpperCase()}</h2>
-      <p>Breed: ${player.breed}</p>
-      <p>Status: ${player.status}</p>
-      <p>Created at: ${player.createdAt}</p>
-      <p>Status: ${player.status}</p>
-      <img src="${player.imageUrl}" alt="NO IMAGE AVAILABLE"> 
-      <button class="close-button">Close</button>
-    `;
-
-    playerContainer.appendChild(playerDetailsElement);
-
-    // add event listener to close button
-    const closeButton = playerContainer.querySelector(".close-button");
-    closeButton.addEventListener("click", async () => {
-      // reload the page
-      location.reload();
-    });
-  } catch (error) {
-    console.error(error);
-  }
 };
 
 /**
