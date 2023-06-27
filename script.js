@@ -13,15 +13,6 @@ var  COHORT_ID = 479;
  * @returns An array of objects.
  */
 const fetchSinglePlayer = async (playerId) => {
-  try {
-    const response = await fetch(`${APIURL}players/${playerId}`);
-    const player = await response.json();
-    console.log(player);
-    return player.data.player;
-  } catch (err) {
-    console.error(`Oh no, trouble fetching player #${playerId}!`, err);
-    return null;
-  }
 };
 
 // add a new player
