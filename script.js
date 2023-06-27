@@ -48,9 +48,10 @@ const addNewPlayer = async (playerObj) => {
     });
 
     const newPlayer = await response.json();
-    return newPlayer;
+    return newPlayer.data.player; // Return the new player object
   } catch (err) {
     console.error("Oops, something went wrong with adding that player!", err);
+    return null;
   }
 };
 
@@ -61,70 +62,50 @@ const addNewPlayer = async (playerObj) => {
 
 const renderNewPlayerForm = () => {
   try {
-    // Create the form element
-    const formElement = document.createElement("form");
-    formElement.id = "new-player-form";
+    const formHTML = document.createElement("div");
+    formHTML.classList.add("form");
+    formHTML.innerHTML = `
+            <h3>Add a new player!</h3>
+            <form id="new-player-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <label for="breed">Breed:</label>
+                <input type="text" id="breed" required>
+                <label for="status">Status (field or bench):</label>
+                <input type="text" id="status" required>
+                <label for="image">ImageURL (in .JPG):</label>
+                <input type="text" id="image" required>
+                <button type="submit">Add Player</button>
+            </form>
+        `;
 
-    // Create input fields
-    const nameInput = document.createElement("input");
-    nameInput.type = "text";
-    nameInput.name = "name";
-    nameInput.placeholder = "Player Name";
-
-    const breedInput = document.createElement("input");
-    breedInput.type = "text";
-    breedInput.name = "breed";
-    breedInput.placeholder = "Breed";
-
-    const statusInput = document.createElement("input");
-    statusInput.type = "text";
-    statusInput.name = "status";
-    statusInput.placeholder = "Status";
-
-    const imageURLInput = document.createElement("input");
-    imageURLInput.type = "text";
-    imageURLInput.name = "imageURL";
-    imageURLInput.placeholder = "Image URL";
-
-    // Create submit button
-    const submitButton = document.createElement("button");
-    submitButton.type = "submit";
-    submitButton.textContent = "Add Player";
-
-    // Add input fields and button to the form
-    formElement.appendChild(nameInput);
-    formElement.appendChild(breedInput);
-    formElement.appendChild(statusInput);
-    formElement.appendChild(imageURLInput);
-    formElement.appendChild(submitButton);
-
-    // Add event listener for form submission
-    formElement.addEventListener("click", async (event) => {
+    // Add event listener to the form submission
+    const formElement = formHTML.querySelector("#new-player-form");
+    formElement.addEventListener("submit", async (event) => {
       event.preventDefault();
+      const name = document.getElementById("name").value;
+      const breed = document.getElementById("breed").value;
+      const status = document.getElementById("status").value;
+      const image = document.getElementById("image").value;
 
-      // Retrieve form input values
       const playerObj = {
-        name: nameInput.value,
-        breed: breedInput.value,
-        status: statusInput.value,
-        imageURL: imageURLInput.value,
+        name: name,
+        breed: breed,
+        status: status,
+        imageUrl: image,
       };
-      console.log(playerObj);
-      // Call the addNewPlayer function to add the player
       await addNewPlayer(playerObj);
-
-      // Clear the form after submitting
-      formElement.reset();
-
-      // Fetch all players and render them
-      const players = await fetchAllPlayers();
-      renderAllPlayers(players);
+      alert(
+        `New player has been created! Everybody welcome ${playerObj.name}!`
+      );
+      const playerList = await fetchAllPlayers();
+      renderAllPlayers(playerList);
     });
 
-    // Append the form to the desired container in the DOM
-    newPlayerFormContainer.appendChild(formElement);
-  } catch (err) {
-    console.error("Uh oh, trouble rendering the new player form!", err);
+    // Append the form inside newPlayerFormContainer
+    newPlayerFormContainer.append(formHTML);
+  } catch (error) {
+    console.error("Trouble rendering players", error);
   }
 };
 
