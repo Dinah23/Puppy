@@ -115,20 +115,6 @@ const renderSinglePlayerById = async (playerId) => {
  * @returns the playerContainerHTML variable.
  */
 const renderAllPlayers = (playerList) => {
-  try {
-    playerContainer.innerHTML = "";
-    playerList.forEach((player) => {
-      const playerElement = document.createElement("div");
-      playerElement.classList.add(`player`);
-      playerElement.innerHTML = `
-        <h2>${player.name.toUpperCase()}</h2>
-        <p>Breed: ${player.breed}</p>
-        <p>Status: ${player.status}</p>
-        <p>Created at: ${player.createdAt}</p>
-        <img src="${player.imageUrl}" alt="NO IMAGE AVAILABLE">
-        <button class="details-button">See Details</button>
-        <button class="remove-button">Remove from Roster</button>
-      `;
 
       // Add event listener to the details button
       const detailsButton = playerElement.querySelector(".details-button");
