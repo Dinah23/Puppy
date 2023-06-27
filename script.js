@@ -10,20 +10,6 @@ const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`;
  * It fetches all players from the API and returns them
  * @returns An array of objects.
  */
-
-//fetch all players
-const fetchAllPlayers = async () => {
-  try {
-    const response = await fetch(`${APIURL}players/`);
-    const players = await response.json();
-    return players.data.players;
-  } catch (err) {
-    console.error("Uh oh, trouble fetching players!", err);
-    return []; // returns empty array in case of an error
-  }
-};
-
-// fetch single player
 const fetchSinglePlayer = async (playerId) => {
   try {
     const response = await fetch(`${APIURL}players/${playerId}`);
