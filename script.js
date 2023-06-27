@@ -41,61 +41,7 @@ const addNewPlayer = async (playerObj) => {
   }
 };
 
-/**
- * It renders a form to the DOM, and when the form is submitted, it adds a new player to the database,
- * fetches all players from the database, and renders them to the DOM.
- */
 
-const renderNewPlayerForm = () => {
-  try {
-    const formHTML = document.createElement("div");
-    formHTML.classList.add("form");
-    formHTML.innerHTML = `
-            <h3>Add a new player!</h3>
-            <form id="new-player-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" required>
-                <label for="breed">Breed:</label>
-                <input type="text" id="breed" required>
-                <label for="status">Status (field or bench):</label>
-                <input type="text" id="status" required>
-                <label for="image">ImageURL (in .JPG):</label>
-                <input type="text" id="image" required>
-                <button type="submit">Add Player</button>
-            </form>
-        `;
-
-    // Add event listener to the form submission
-    const formElement = formHTML.querySelector("#new-player-form");
-    formElement.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const name = document.getElementById("name").value;
-      const breed = document.getElementById("breed").value;
-      const status = document.getElementById("status").value;
-      const image = document.getElementById("image").value;
-
-      const playerObj = {
-        name: name,
-        breed: breed,
-        status: status,
-        imageUrl: image,
-      };
-      await addNewPlayer(playerObj);
-      alert(
-        `New player has been created! Everybody welcome ${playerObj.name}!`
-      );
-      const playerList = await fetchAllPlayers();
-      renderAllPlayers(playerList);
-    });
-
-    // Append the form inside newPlayerFormContainer
-    newPlayerFormContainer.append(formHTML);
-  } catch (error) {
-    console.error("Trouble rendering players", error);
-  }
-};
-
-// remove a player
 const removePlayer = async (playerId) => {
   try {
     const response = await fetch(`${APIURL}/players/${playerId}`, {
