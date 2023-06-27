@@ -1,5 +1,44 @@
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+#game-container {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+#player-form {
+  margin-bottom: 20px;
+}
+
+#player-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#player-form input[type=text] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+#add-player-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+#dlt-player-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+#add-player-btn:hover {
+  background-color: #3e8e41;
+}
+
+.player-card {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 10px;
 }

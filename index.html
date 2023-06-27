@@ -4,17 +4,30 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script defer src="script.js"></script>
   <link rel="stylesheet" href="styles.css">
   <title>PuppyBowl</title>
 </head>
 <body>
   <!-- form to add new players -->
-  <div id="new-player-form"></div>
-
-  <!-- container for all players -->
-  <div id="all-players-container"></div>
-
+  <div id="game-container">
+    <h2>Puppy Bowl Game</h2>
+    <div id="player-form">
+      <h3>Add a new puppy player:</h3>
+      <label for="player-name">Name:</label>
+      <input type="text" id="player-name" name="player-name">
+      <label for="player-breed">Breed:</label>
+      <input type="text" id="player-breed" name="player-breed">
+      <button id="add-player-btn">Add player</button>
+      <button id="dlt-player-btn">Delete Player</button>
+      <h3>Add Your Puppy Image
+      <input type="file" id="myFile" name="filename">
+      <input type="submit">
+      </h3>
+    </div>
+    <div id="player-list">
+      <h3>List of puppy players:</h3>
+    </div>
+  </div>
   <!-- import JavaScript -->
   <script src="./script.js"></script>
 </body>
